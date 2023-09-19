@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <title>2301487</title>
+    <style>
+      @font-face {
+        font-family: "DOSIyagiMedium";
+        src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/DOSIyagiMedium.woff2")
+          format("woff2");
+        font-weight: normal;
+        font-style: normal;
+      }
+      * {
+        background-color: black;
+        font-family: "DOSIyagiMedium";
+      }
+      hr {
+        border-color: green;
+      }
+      .title, .contents * {
+        font-size: 25px;
+        color: green;
+      }
+      .contents div {
+        padding-top: 10px;
+      }
+      .contents #input input{
+        outline: none;
+        border: none;
+      }
+      #help, #dir, #type_error, #introduce, #favorite, #dream, #hope{
+        display: none;
+      }
+      #welcome_msg {
+        font-size: 30px;
+      }
+    </style>
+    <script>
+      function onCommand(){
+        var commandData = document.getElementById("command").value.split(" ");
+        var command = commandData[0];
+        var param = commandData[1];
+        document.getElementById("command").value = "";
+        
+        var contents = ["help", "type_error", "dir", "introduce", "favorite", "dream", "hope"];
+        contents.forEach(function(id, index){ document.getElementById(id).style.display = "none"; });
+        if(command == undefined) return;
+
+        command = command.toLowerCase();
+        switch(command){
+          case "help" :
+          case "dir" :
+            document.getElementById(command).style.display = 'block';
+            break;
+
+          case "type" :
+            if(param == undefined || !(["자기소개.txt", "좋아함.txt", "진로.txt", "싶어요.txt"].includes(param))) document.getElementById("type_error").style.display = 'block';
+            else{
+              var files = ["자기소개.txt", "좋아함.txt", "진로.txt", "싶어요.txt"];
+              var showTo = ["introduce", "favorite", "dream", "hope"];
+              document.getElementById(showTo[files.indexOf(param)]).style.display = 'block';
+            }
+            break;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div class="title">
+      <p id="welcome_msg">환영합니다. [Version 1.0]</p>
+      <p id="welcome_msg">(c) Johanbit Corporation. All rights reserved.</p>
+    </div>
+    <div class="contents">
+      <hr />
+      <div id="help">
+        <p>C:\Users\Johanbit> help</p>
+        <pre>DIR      파일 목록을 확인합니다.</pre>
+        <pre>TYPE     텍스트 파일의 내용을 표시합니다.</pre>
+        <pre>         - 사용법 : TYPE 파일명</pre>
+      </div>
+
+      <div id="dir">
+        <p>C:\Users\Johanbit> dir</p>
+        <pre>      날짜            시간              파일명</pre>
+        <pre>---------------------------------------------------</pre>
+        <pre>2023-09-19-화요일  오후  03:15  TXT  자기소개.txt</pre>
+        <pre>2023-09-19-화요일  오후  03:16  TXT  좋아함.txt</pre>
+        <pre>2023-09-19-화요일  오후  03:17  TXT  진로.txt</pre>
+        <pre>2023-09-19-화요일  오후  03:18  TXT  싶어요.txt</pre>
+      </div>
+
+      <div id="type_error">
+        <p>C:\Users\Johanbit> type error</p>
+        <p>해당 파일은 존재하지 않습니다.</p>
+      </div>
+
+      <div id="introduce">
+        <p>C:\Users\Johanbit> type 자기소개.txt</p>
+        <p>저는 소프트웨어학부 1학년 조한빛입니다.</p>
+      </div>
+
+      <div id="favorite">
+        <p>C:\Users\Johanbit> type 좋아함.txt</p>
+        <p>낮잠, 늦잠, 멍</p>
+      </div>
+
+      <div id="dream">
+        <p>C:\Users\Johanbit> type 진로.txt</p>
+        <p>해적왕</p>
+      </div>
+
+      <div id="hope">
+        <p>C:\Users\Johanbit> type 싶어요.txt</p>
+        <p>css 애니메이션 사용법에 대해 알고 싶어요</p>
+      </div>
+
+      <div id="input">
+        <form onsubmit="onCommand(); return false;" autocomplete="off">
+          <label for="command">C:\Users\Johanbit></label>
+          <input type="text" id="command" placeholder="명령어 또는 help 입력">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
