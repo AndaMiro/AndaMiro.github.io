@@ -55,9 +55,9 @@
             break;
 
           case "type" :
-            if(param == undefined || !(["자기소개.txt", "좋아함.txt", "진로.txt", "싶어요.txt"].includes(param))) document.getElementById("type_error").style.display = 'block';
+            var files = ["자기소개.txt", "좋아함.txt", "진로.txt", "싶어요.txt"];
+            if(param == undefined || !(files.includes(param))) document.getElementById("type_error").style.display = 'block';
             else{
-              var files = ["자기소개.txt", "좋아함.txt", "진로.txt", "싶어요.txt"];
               var showTo = ["introduce", "favorite", "dream", "hope"];
               document.getElementById(showTo[files.indexOf(param)]).style.display = 'block';
             }
